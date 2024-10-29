@@ -1,0 +1,104 @@
+body {
+    font-family: 'Arial', sans-serif;  /* Frutiger Aero clean font */
+    background: linear-gradient(135deg, #cef1d1, #a0e0b0); /* Gradient background for the Aero feel */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.messenger {
+    width: 350px;
+    background: rgba(255, 255, 255, 0.2);  /* Translucent glass background */
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);  /* Stronger shadow for floating glass effect */
+    backdrop-filter: blur(15px);  /* This creates the frosted glass effect */
+    overflow: hidden;  /* To ensure rounded corners apply to children */
+}
+
+.header {
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.3));  /* Glossy glass-like gradient */
+    padding: 15px;
+    color: white;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px 10px 0 0;  /* Rounded top corners */
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3);  /* Light inner shadow for sunken glossy effect */
+}
+
+#status {
+    width: 90%;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 5px;
+    margin-top: 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.4);  /* Light glassy input field */
+    color: #333;
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.6);  /* Inner glow for input */
+}
+
+.messages {
+    height: 250px;
+    padding: 15px;
+    overflow-y: auto;
+    background-color: rgba(255, 255, 255, 0.3);  /* More transparent, frosted glass */
+    color: #333;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);  /* Frosted glass effect inside messages area */
+}
+
+.input-area {
+    display: flex;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.3);  /* Slightly transparent */
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 0 0 10px 10px;  /* Rounded bottom corners */
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5);  /* Glassy inset effect */
+}
+
+#messageInput {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 5px;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.2);  /* Translucent input box */
+    color: #333;
+    backdrop-filter: blur(5px);  /* Frosted glass effect inside the input */
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.4), 0 1px 2px rgba(0, 0, 0, 0.1);  /* Inner and outer shadow */
+}
+
+#sendBtn {
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));  /* Glossy button with light */
+    color: #4caf50;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    padding: 10px 20px;
+    margin-left: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);  /* Shadow for raised button effect */
+}
+
+#sendBtn:hover {
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5));  /* Brighter hover effect */
+}
+
+#sendBtn:active {
+    box-shadow: none;  /* Pressed button effect */
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.4));  /* Dimmer active state */
+}
+
+#messages div {
+    background-color: rgba(255, 255, 255, 0.4);  /* Semi-transparent message bubbles */
+    padding: 8px 12px;
+    margin: 5px 0;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);  /* Shadow to give message bubbles depth */
+    backdrop-filter: blur(5px);  /* Frosted glass inside message bubbles */
+}

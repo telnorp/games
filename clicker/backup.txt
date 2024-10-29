@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fi">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Janne Clicker</title>
+        <link rel="stylesheet" href="resources/style.css">
+    </head>
+    <body>
+        <div id="clickerContainer">
+            <h1>Janne Clicker</h1>
+            <button id="clickButton">Click me!</button>
+            <p>Clicks: <b><span id="clickCount">0</span></b></p>
+                <div id="xpBar">
+                    <div id="xpProgress"></div>
+                </div> 
+        </div>
+
+        <div id="upgradesContainer">
+            <h2>Upgrades</h2>
+            <button id="upgradeButton" disabled>Upgrade</button>
+            <button id="autoClickerButton" disabled>Buy 2 Auto-Clickers</button>
+            <p>Auto-Clicker price: <span id="aClickPriceStat"></span></p>
+            <p>Click Upgrade price: <span id="upgradePriceStat"></span></p>
+        </div>
+
+        <div id="statsContainer">
+            <h3>Stats</h3>
+            <p>Level: <span class="levelText" id="showLevel">1</span></p>
+            <p>Upgrades Purchased: <span id="upgradesPurchased">0</span></p>
+            <p>Auto-Clickers Owned: <span id="autoClickersOwned">0</span></p>
+            <p>idle Clicks Per Second (iCPS): <span id="clicksPerSecond">0</span></p>
+            <p>Total Clicks Generated: <span id="totalClicksGenerated">0</span></p>
+        </div>
+
+        <script src="clicker.js"></script>
+        <script src="gameSave.js"></script>
+    </body>
+</html>
