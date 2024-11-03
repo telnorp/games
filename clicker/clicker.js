@@ -4,16 +4,17 @@ let autoClickers = 0;
 let clickRate = 0;  
 let totalClicksGenerated = 0;  
 let upgradesPurchased = 0;  
-const priceFactor = 1.15;
 let aClickPrice = 50;
 let upgradePrice = 10;
 let pLevel = 1;
 let pXp = 0;
-const xpCurve = 2.4;
 let nextLevelXp = 500;
-
+//click source: 0 = idle, 1 = manual
 var cSrc;
+let xpAmount = 5;
 
+const priceFactor = 1.15;
+const xpCurve = 2.4;
 const clickButton = document.getElementById('clickButton');
 const clickCountDisplay = document.getElementById('clickCount');
 const upgradeButton = document.getElementById('upgradeButton');
@@ -25,11 +26,10 @@ const autoClickersOwnedDisplay = document.getElementById('autoClickersOwned');
 const clicksPerSecondDisplay = document.getElementById('clicksPerSecond');
 const totalClicksGeneratedDisplay = document.getElementById('totalClicksGenerated');
 const pLevelDisplay = document.getElementById('showLevel');
- 
+
 let lastScrollTime = 0;
 const scrollDebounceTime = 25;
 let spacePressed = false;
-
 function updateClickCount(cSrc) {
     clickCountDisplay.textContent = clickCount;
 
@@ -38,7 +38,6 @@ function updateClickCount(cSrc) {
 
     upgradesPurchasedDisplay.textContent = upgradesPurchased;
     autoClickersOwnedDisplay.textContent = autoClickers;
-    clicksPerSecondDisplay.textContent = autoClickers; 
     totalClicksGeneratedDisplay.textContent = totalClicksGenerated;
     pLevelDisplay.textContent = pLevel;
 
@@ -58,9 +57,11 @@ function toggleButtonState(button, condition) {
 
 function applyIdleClicks() {
     if (autoClickers !== 0) {
-    clickCount += clickRate;  // Increment by the click rate (idle clicks)
-    totalClicksGenerated += clickRate;  // Track total clicks
-    updateClickCount(0); // Update display without adding XP
+        for (let i = 0; i < pLevel; i++) {
+            clickCount += clickRate;  // Increment by the click rate (idle clicks)
+            totalClicksGenerated += clickRate;  // Track total clicks
+            updateClickCount(0); // Update display without adding XP
+        }
     }
 }
 
@@ -134,12 +135,12 @@ function roundToNearest5(num) {
 function createFloatingText(xpAmount, x, y, type) {
     const floatingText = document.createElement('div');
     floatingText.className = 'floating-text';
-    if (type = "xp") {
-    floatingText.innerText = `+${xpAmount} xp`;
-    } 
-    else if (type = "lvl") {
+
+    if (type === "xp") {
+        floatingText.innerText = `+${xpAmount} xp`;
+    } else if (type === "lvl") {
         floatingText.innerText = `+LVL`;
-        floatingText.style.color = '#fff959';
+        floatingText.style.color = '#00ff0d';
     }
     document.body.appendChild(floatingText);
     
@@ -151,15 +152,15 @@ function createFloatingText(xpAmount, x, y, type) {
     setTimeout(() => {
         floatingText.style.transform = 'translateY(-50px)';
         floatingText.style.opacity = '0';
-    }, 10);
+    }, type === "lvl" ? 5000 : 10);
 
     // Remove the text after the animation completes
     setTimeout(() => {
         floatingText.remove();
-    }, 600);
+    }, type === "lvl" ? 5000 : 600);
 }
 function addExperience() {
-    const xpAmount = 5; // Change this if you want to display different amounts
+    xpAmount = 5 * pLevel;
     pXp += xpAmount; // Increase experience by 5 instead of 1
     updateXP();
 
@@ -180,7 +181,7 @@ function lvlUp() {
     pLevel++;
     const x = window.innerWidth / 2;
     const y = window.innerHeight / 2;
-    createFloatingText(5, x, y, "lvl");
+    createFloatingText("1", x, y, "lvl");
     nextLevelXp = pXp * xpCurve;
     pXp = 0;
 }
@@ -191,6 +192,15 @@ function updateXP() {
     clearInterval(xpInterval);
     const xpProgress = document.getElementById('xpProgress');
     const targetPercentage = (pXp / nextLevelXp) * 100;
+    
+    if (targetPercentage >= 100) {
+        // Instantly reset to 0% when reaching 100%
+        xpProgress.style.width = '0%';
+        const xpText = document.getElementById('xpText');
+        xpText.textContent = `0/${nextLevelXp}`;
+        return; // Exit the function early
+    }
+
     let currentPercentage = parseFloat(xpProgress.style.width) || 0;
 
     // Prevent fluctuation by setting a small threshold for adjustments
@@ -210,6 +220,13 @@ function updateXP() {
             clearInterval(xpInterval); 
         }
     }, 20);
+    const percentage = (pXp / nextLevelXp) * 100;
+    const xpText = document.getElementById('xpText'); 	
+
+    xpProgress.style.width = `${percentage}%`;
+    xpText.textContent = `${pXp}/${nextLevelXp}`;
 }
+	
+
 
 setInterval(applyIdleClicks, 1000);
